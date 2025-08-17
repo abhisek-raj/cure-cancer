@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Cure Q&A System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .status {
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .status-item {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .question-form {
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .response-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            display: none;
+        }
+        
+        .response-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .response-text {
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e3f2fd;
+        }
+        
+        .response-details {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f1f3f4;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .examples {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f5e8;
+            border-radius: 10px;
+        }
+        
+        .examples h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .example-question {
+            background: white;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .example-question:hover {
+            background: #f1f8e9;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .footer a {
+            color: #74b9ff;
+            text-decoration: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #667eea;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩺 Cancer Cure Q&A</h1>
+            <p>Ask about natural cancer treatment based on "The Cure for All Cancers"</p>
+        </div>
+        
+        <div class="status">
+            <span class="status-item {% if model_loaded %}status-success{% else %}status-warning{% endif %}">
+                {% if model_loaded %}✅ ML Model Loaded{% else %}⚠️ Using Keyword Matching{% endif %}
+            </span>
+            <span class="status-item status-success">
+                📊 Questions Asked: {{ question_count }}
+            </span>
+        </div>
+        
+        <div class="main-content">
+            <form class="question-form" id="questionForm">
+                <div class="form-group">
+                    <label for="question">❓ Your Question:</label>
+                    <input type="text" 
+                           id="question" 
+                           class="form-control" 
+                           placeholder="e.g., How to cure cancer naturally?"
+                           required>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">
+                    🔍 Get Treatment Answer
+                </button>
+            </form>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analyzing your question...</p>
+            </div>
+            
+            <div id="responseSection" class="response-section">
+                <h3>💡 Treatment Response:</h3>
+                <div id="responseText" class="response-text"></div>
+                
+                <div class="response-details">
+                    <h4>📊 Analysis Details:</h4>
+                    <div id="analysisDetails"></div>
+                </div>
+            </div>
+            
+            <div id="errorSection" class="error" style="display: none;"></div>
+            
+            <div class="examples">
+                <h3>💭 Example Questions:</h3>
+                <div class="example-question" onclick="askExample('How to cure cancer naturally?')">
+                    How to cure cancer naturally?
+                </div>
+                <div class="example-question" onclick="askExample('What herbs treat cancer?')">
+                    What herbs treat cancer?
+                </div>
+                <div class="example-question" onclick="askExample('How does zapper eliminate parasites?')">
+                    How does zapper eliminate parasites?
+                </div>
+                <div class="example-question" onclick="askExample('Best cancer detox protocol?')">
+                    Best cancer detox protocol?
+                </div>
+                <div class="example-question" onclick="askExample('How to remove cancer parasites?')">
+                    How to remove cancer parasites?
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📚 Based on "The Cure for All Cancers" by Dr. Hulda Clark</p>
+            <p><a href="/stats">📊 View Statistics</a> | <a href="/about">ℹ️ About</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            askQuestion();
+        });
+        
+        async function askQuestion() {
+            const question = document.getElementById('question').value.trim();
+            
+            if (!question) {
+                showError('Please enter a question');
+                return;
+            }
+            
+            showLoading(true);
+            hideError();
+            hideResponse();
+            
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResponse(data.data);
+                } else {
+                    showError(data.error);
+                }
+                
+            } catch (error) {
+                showError('Connection error: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        function askExample(question) {
+            document.getElementById('question').value = question;
+            askQuestion();
+        }
+        
+        function showResponse(data) {
+            const responseText = document.getElementById('responseText');
+            const analysisDetails = document.getElementById('analysisDetails');
+            const responseSection = document.getElementById('responseSection');
+            
+            responseText.textContent = data.treatment_response;
+            
+            let analysisHtml = '';
+            
+            if (data.ml_classification.model_used && data.ml_classification.category) {
+                analysisHtml += `<div class="detail-item">
+                    <strong>🧠 ML Classification:</strong> ${data.ml_classification.category} 
+                    (Confidence: ${(data.ml_classification.confidence * 100).toFixed(1)}%)
+                </div>`;
+            }
+            
+            if (data.keyword_analysis.matched_keywords.length > 0) {
+                analysisHtml += `<div class="detail-item">
+                    <strong>🔍 Keywords Found:</strong> ${data.keyword_analysis.matched_keywords.join(', ')}
+                </div>`;
+            }
+            
+            analysisHtml += `<div class="detail-item">
+                <strong>🎯 Treatment Approach:</strong> ${data.selected_approach}
+            </div>`;
+            
+            if (Object.keys(data.category_scores).length > 0) {
+                const scores = Object.entries(data.category_scores)
+                    .map(([cat, score]) => `${cat}: ${score}`)
+                    .join(', ');
+                analysisHtml += `<div class="detail-item">
+                    <strong>📊 Category Scores:</strong> ${scores}
+                </div>`;
+            }
+            
+            analysisDetails.innerHTML = analysisHtml;
+            responseSection.classList.add('show');
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('submitBtn').disabled = show;
+        }
+        
+        function showError(message) {
+            const errorSection = document.getElementById('errorSection');
+            errorSection.textContent = message;
+            errorSection.style.display = 'block';
+        }
+        
+        function hideError() {
+            document.getElementById('errorSection').style.display = 'none';
+        }
+        
+        function hideResponse() {
+            document.getElementById('responseSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

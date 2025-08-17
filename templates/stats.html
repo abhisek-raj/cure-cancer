@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - Cancer Cure Q&A</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            background: #f5f5f5; 
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        
+        .header { 
+            text-align: center; 
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card { 
+            background: #f8f9fa; 
+            padding: 25px; 
+            margin: 20px 0; 
+            border-radius: 10px; 
+            border-left: 5px solid #007bff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number { 
+            font-size: 2.2em; 
+            font-weight: bold; 
+            color: #007bff; 
+            margin: 10px 0;
+        }
+        
+        .stat-card h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .back-link { 
+            display: inline-block; 
+            margin: 20px 0; 
+            padding: 12px 25px; 
+            background: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .category-item {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .category-name {
+            font-weight: 600;
+            color: #343a40;
+        }
+        
+        .category-count {
+            background: #e9ecef;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #495057;
+            font-weight: bold;
+        }
+        
+        .model-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .model-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .model-inactive {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Q&A System Statistics</h1>
+            <p>Usage analytics and system information</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Total Questions Asked</h3>
+            <div class="stat-number">{{ stats.total_questions }}</div>
+            <p>Total interactions with the system</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>ML Model Status</h3>
+            <div class="stat-number">
+                {% if stats.model_loaded %}
+                    <span class="model-status model-active">✅ Active</span>
+                {% else %}
+                    <span class="model-status model-inactive">⚠️ Inactive</span>
+                {% endif %}
+            </div>
+            <p>Model Path: <code>{{ stats.model_path }}</code></p>
+        </div>
+        
+        {% if stats.category_distribution %}
+        <div class="stat-card">
+            <h3>Response Categories Used</h3>
+            <p>Distribution of treatment approaches in responses:</p>
+            
+            <div style="margin-top: 20px;">
+                {% for category, count in stats.category_distribution.items() %}
+                <div class="category-item">
+                    <span class="category-name">{{ category|title }}</span>
+                    <span class="category-count">{{ count }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <a href="/" class="back-link">← Back to Q&A</a>
+    </div>
+</body>
+</html>

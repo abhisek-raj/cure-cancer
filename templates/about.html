@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Cancer Cure Q&A</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 40px;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h2 i {
+            margin-right: 15px;
+            font-size: 1.5em;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .section ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .section li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .back-link { 
+            display: inline-block; 
+            margin: 20px 0; 
+            padding: 12px 25px; 
+            background: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h3 i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+        
+        .disclaimer {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ℹ️ About Cancer Cure Q&A System</h1>
+            <p>An intelligent system providing information about natural cancer treatments based on Dr. Hulda Clark's research</p>
+        </div>
+        
+        <div class="section">
+            <h2><i>📚</i> Source Material</h2>
+            <p>This Q&A system is based on the research and protocols described in <strong>"The Cure for All Cancers"</strong> by Dr. Hulda Clark. The system's responses are generated from the key treatment approaches outlined in her work, including:</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><i>🌿</i> Herbal Protocols</h3>
+                    <p>Information about using black walnut, wormwood, and other herbs for parasite elimination.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i>⚡</i> Electronic Treatments</h3>
+                    <p>Details about zapper devices and frequency-based treatments for pathogen elimination.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i>🧪</i> Detox Methods</h3>
+                    <p>Protocols for removing toxins, heavy metals, and environmental pollutants from the body.</p>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>Important:</strong> This system is for informational purposes only and is not intended as medical advice. Always consult with qualified healthcare professionals before starting any treatment.
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i>🧠</i> How It Works</h2>
+            <p>The system uses advanced natural language processing to understand questions about cancer treatments and provide relevant responses based on Dr. Clark's protocols.</p>
+            
+            <div class="highlight-box">
+                <h3>Dual Analysis Approach:</h3>
+                <ol>
+                    <li><strong>Machine Learning Classification:</strong> Analyzes the intent and context of your question using trained models.</li>
+                    <li><strong>Keyword Analysis:</strong> Identifies specific treatment-related terms and concepts in your question.</li>
+                </ol>
+                <p>These methods work together to provide the most accurate and relevant response to your query.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i>🔍</i> Example Questions</h2>
+            <p>Try asking questions like:</p>
+            <ul>
+                <li>How can I eliminate parasites naturally?</li>
+                <li>What's the best herbal protocol for cancer treatment?</li>
+                <li>How does the zapper work against pathogens?</li>
+                <li>What foods should I avoid during cancer treatment?</li>
+                <li>How to detoxify the body from environmental toxins?</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2><i>📊</i> System Information</h2>
+            <p>This web application is built using:</p>
+            <ul>
+                <li><strong>Backend:</strong> Python with Flask framework</li>
+                <li><strong>Frontend:</strong> HTML5, CSS3, and JavaScript</li>
+                <li><strong>Machine Learning:</strong> Custom-trained text classification model</li>
+                <li><strong>Version:</strong> 1.0.0</li>
+            </ul>
+            
+            <p style="margin-top: 30px;">
+                <a href="/" class="back-link">← Back to Q&A</a>
+                <a href="/stats" class="back-link" style="margin-left: 15px; background: #6c757d;">View Statistics →</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
