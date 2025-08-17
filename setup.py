@@ -10,12 +10,12 @@ setup(
         'Jinja2==3.1.2',
         'itsdangerous==2.1.2',
         'click==8.1.7',
-        'numpy==1.24.4',
-        'scikit-learn==1.3.0',
-        'scipy==1.10.1',
+        'numpy>=2.3.2',
+        'scikit-learn==1.6.1',  # Must match the version used to train the model
+        'scipy>=1.16.1',
         'joblib==1.3.2',
         'threadpoolctl==3.2.0',
-        'gunicorn==21.2.0',
+        'gunicorn',
     ],
     python_requires='>=3.10, <3.11',
 )

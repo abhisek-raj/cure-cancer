@@ -285,9 +285,13 @@ def api_stats():
 def about():
     return render_template('about.html')
 
+def create_app():
+    # Ensure required directories exist
+    os.makedirs('templates', exist_ok=True)
+    os.makedirs('static', exist_ok=True)
+    os.makedirs('models', exist_ok=True)
+    return app
+
 if __name__ == '__main__':
-    if not os.path.exists('templates'):
-        os.makedirs('templates')
-    if not os.path.exists('static'):
-        os.makedirs('static')
-    app.run(debug=True)
+    app = create_app()
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
