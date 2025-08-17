@@ -1,5 +1,5 @@
 # Python version
-python_version = '3.10'
+# Python version is specified in runtime.txt or pyproject.toml instead
 
 # Core dependencies
 flask==2.3.3
